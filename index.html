@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palestinian Recipes</title>
+  <style>
+    /* === General Styles === */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('Olive Tree.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Amiri', serif;
+      color: #2E8B57; /* Olive green */
+    }
+
+    a {
+      text-decoration: none;
+      color: #8B0000; /* Dark red */
+    }
+
+    a:hover {
+      color: #556B2F; /* Olive green */
+    }
+
+    /* === Kofiya Design === */
+    .kofiya-design {
+      background: url('kufiyyeh.jpeg') repeat-x;
+      height: 20px;
+      margin: 20px 0;
+    }
+
+    /* === Olive Branch Designs === */
+    .olive-branch {
+      position: absolute;
+      width: 100px;
+      height: auto;
+    }
+
+    .olive-branch.top-left {
+      top: 0;
+      left: 0;
+    }
+
+    .olive-branch.top-right {
+      top: 0;
+      right: 0;
+      transform: scaleX(-1);
+    }
+
+    .olive-branch.bottom-left {
+      bottom: 0;
+      left: 0;
+      transform: scaleY(-1);
+    }
+
+    .olive-branch.bottom-right {
+      bottom: 0;
+      right: 0;
+      transform: scale(-1, -1);
+    }
+
+    /* === Navigation Bar === */
+    nav {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      font-weight: bold;
+    }
+
+    #language-toggle {
+      background: #2E8B57; /* Olive green */
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    #language-toggle:hover {
+      background: #8B0000; /* Dark red */
+    }
+
+    /* === Homepage Section === */
+    #home {
+      text-align: center;
+      padding: 100px 20px;
+      background: rgba(255, 255, 255, 0.8);
+      margin: 20px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    #home p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    #home button {
+      background: #8B0000; /* Dark red */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #home button:hover {
+      background: #2E8B57; /* Olive green */
+    }
+
+    /* === Recipe Categories Section === */
+    #recipes {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .category-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      transform: scale(1.05);
+    }
+
+    .category-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .category-card h3 {
+      margin-top: 10px;
+      font-size: 1.5rem;
+    }
+
+    /* === Recipe Flashcard Section === */
+    .recipe-flashcards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    .recipe-flashcard {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .recipe-flashcard:hover {
+      transform: scale(1.05);
+    }
+
+    .recipe-flashcard img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .recipe-flashcard h3 {
+      margin-top: 10px;
+      font-size: 1.5rem;
+    }
+
+    /* === Recipe Details Section === */
+    .recipe-details {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    .recipe-details h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .recipe-details p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .recipe-details ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recipe-details ul li {
+      margin-bottom: 10px;
+    }
+
+    /* === About Palestine Section === */
+    #about {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    #about h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* === Footer === */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    /* === Responsive Design === */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #home h1 {
+        font-size: 2rem;
+      }
+
+      #home p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Olive Branch Designs -->
+  <img src="Olive Tree.jpeg" alt="Olive Branch" class="olive-branch top-left">
+  <img src="Olive Tree.jpeg" alt="Olive Branch" class="olive-branch top-right">
+  <img src="Olive Tree.jpeg" alt="Olive Branch" class="olive-branch bottom-left">
+  <img src="Olive Tree.jpeg" alt="Olive Branch" class="olive-branch bottom-right">
+
+  <!-- Kofiya Design -->
+  <div class="kofiya-design"></div>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#recipes">Recipes</a></li>
+      <li><a href="#about">About Palestine</a></li>
+    </ul>
+    <button id="language-toggle">عربي</button>
+  </nav>
+
+  <!-- Homepage Section -->
+  <section id="home">
+    <h1>Welcome to Palestinian Recipes</h1>
+    <p>Discover the rich and diverse flavors of Palestinian cuisine. From hearty main dishes to sweet desserts, our recipes celebrate the traditions and culture of Palestine.</p>
+    <button onclick="window.location.href='#recipes'">Explore Recipes</button>
+  </section>
+
+  <!-- Recipe Categories Section -->
+  <section id="recipes">
+    <h2>Recipe Categories</h2>
+    <div class="category-grid">
+      <div class="category-card" onclick="window.location.href='#breakfast'">
+        <img src="https://via.placeholder.com/300x200/8B0000/FFFFFF?text=Falafel" alt="Falafel">
+        <h3>Breakfast</h3>
+      </div>
+      <div class="category-card" onclick="window.location.href='#lunch'">
+        <img src="https://via.placeholder.com/300x200/2E8B57/FFFFFF?text=Maqluba" alt="Maqluba">
+        <h3>Lunch</h3>
+      </div>
+      <div class="category-card" onclick="window.location.href='#drinks'">
+        <img src="https://via.placeholder.com/300x200/556B2F/FFFFFF?text=Arabic+Coffee" alt="Arabic Coffee">
+        <h3>Drinks</h3>
+      </div>
+      <div class="category-card" onclick="window.location.href='#sweets'">
+        <img src="https://via.placeholder.com/300x200/556B2F/FFFFFF?text=Knafeh" alt="Knafeh">
+        <h3>Sweets</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breakfast Recipes -->
+  <section id="breakfast" class="recipe-flashcards">
+    <h2>Breakfast Recipes</h2>
+    <div class="recipe-flashcard" onclick="window.location.href='#falafel'">
+      <img src="https://via.placeholder.com/300x200/8B0000/FFFFFF?text=Falafel" alt="Falafel">
+      <h3>Falafel</h3>
+    </div>
+  </section>
+
+  <!-- Lunch Recipes -->
+  <section id="lunch" class="recipe-flashcards">
+    <h2>Lunch Recipes</h2>
+    <div class="recipe-flashcard" onclick="window.location.href='#maqluba'">
+      <img src="https://via.placeholder.com/300x200/2E8B57/FFFFFF?text=Maqluba" alt="Maqluba">
+      <h3>Maqluba</h3>
+    </div>
+  </section>
+
+  <!-- Drinks Recipes -->
+  <section id="drinks" class="recipe-flashcards">
+    <h2>Drinks Recipes</h2>
+    <div class="recipe-flashcard" onclick="window.location.href='#arabic-coffee'">
+      <img src="https://via.placeholder.com/300x200/556B2F/FFFFFF?text=Arabic+Coffee" alt="Arabic Coffee">
+      <h3>Arabic Coffee</h3>
+    </div>
+  </section>
+
+  <!-- Sweets Recipes -->
+  <section id="sweets" class="recipe-flashcards">
+    <h2>Sweets Recipes</h2>
+    <div class="recipe-flashcard" onclick="window.location.href='#knafeh'">
+      <img src="https://via.placeholder.com/300x200/556B2F/FFFFFF?text=Knafeh" alt="Knafeh">
+      <h3>Knafeh</h3>
+    </div>
+  </section>
+
+  <!-- Recipe Details Section -->
+  <div class="recipe-details" id="falafel">
+    <h3>Falafel</h3>
+    <p>Falafel is a deep-fried ball or patty made from ground chickpeas, herbs, and spices. It's a popular breakfast dish in Palestine.</p>
+    <ul>
+      <li>1 cup chickpeas</li>
+      <li>1/2 onion</li>
+      <li>2 cloves garlic</li>
+      <li>1/4 cup parsley</li>
+      <li>1 tsp cumin</li>
+      <li>1 tsp coriander</li>
+      <li>Salt and pepper to taste</li>
+    </ul>
+  </div>
+
+  <div class="recipe-details" id="maqluba">
+    <h3>Maqluba</h3>
+    <p>Maqluba is a traditional Palestinian dish made with rice, vegetables, and meat, cooked in a pot and flipped upside down when served.</p>
+    <ul>
+      <li>2 cups rice</li>
+      <li>1 lb chicken</li>
+      <li>1 eggplant</li>
+      <li>1 cauliflower</li>
+      <li>1 onion</li>
+      <li>Spices (cinnamon, cardamom, bay leaves)</li>
+    </ul>
+  </div>
+
+  <div class="recipe-details" id="arabic-coffee">
+    <h3>Arabic Coffee</h3>
+    <p>Arabic coffee is a traditional drink in Palestine, often served with cardamom and sugar.</p>
+    <ul>
+      <li>1/4 cup finely ground coffee</li>
+      <li>4 cups water</li>
+      <li>1 tsp cardamom</li>
+      <li>Sugar to taste</li>
+    </ul>
+  </div>
+
+  <div class="recipe-details" id="knafeh">
+    <h3>Knafeh</h3>
+    <p>Knafeh is a sweet pastry made with shredded phyllo dough, cheese, and a sugary syrup. It's a beloved dessert in Palestine.</p>
+    <ul>
+      <li>1 lb shredded phyllo dough</li>
+      <li>1 lb akkawi cheese</li>
+      <li>1 cup sugar</li>
+      <li>1/2 cup water</li>
+      <li>1 tsp rose water</li>
+    </ul>
+  </div>
+
+  <!-- About Palestine Section -->
+  <section id="about">
+    <h2>About Palestine</h2>
+    <p>Palestine is a land rich in history and culture. From its ancient olive trees to its vibrant cities, Palestine offers a unique blend of tradition and modernity.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2023 Palestinian Recipes. Designed by Mohammad Alqedra.</p>
+    <p>Contact: mohammadalqedra1976@gmail.com</p>
+  </footer>
+
+  <script>
+    // === JavaScript for Language Toggle ===
+    const languageToggle = document.getElementById('language-toggle');
+    const htmlElement = document.documentElement;
+
+    const translations = {
+      en: {
+        home: "Home",
+        recipes: "Recipes",
+        about: "About Palestine",
+        welcome: "Welcome to Palestinian Recipes",
+        explore: "Discover the rich and diverse flavors of Palestinian cuisine. From hearty main dishes to sweet desserts, our recipes celebrate the traditions and culture of Palestine.",
+        categories: "Recipe Categories",
+        breakfast: "Breakfast",
+        lunch: "Lunch",
+        drinks: "Drinks",
+        sweets: "Sweets",
+        aboutText: "Palestine is a land rich in history and culture. From its ancient olive trees to its vibrant cities, Palestine offers a unique blend of tradition and modernity.",
+        footer: "© 2023 Palestinian Recipes. Designed by Mohammad Alqedra.",
+        contact: "Contact: mohammadalqedra1976@gmail.com"
+      },
+      ar: {
+        home: "الرئيسية",
+        recipes: "وصفات",
+        about: "عن فلسطين",
+        welcome: "مرحبًا بكم في وصفات فلسطين",
+        explore: "اكتشف النكهات الغنية والمتنوعة للمأكولات الفلسطينية. من الأطباق الرئيسية الشهية إلى الحلويات اللذيذة، تحتفل وصفاتنا بتقاليد وثقافة فلسطين.",
+        categories: "فئات الوصفات",
+        breakfast: "الإفطار",
+        lunch: "الغداء",
+        drinks: "المشروبات",
+        sweets: "الحلويات",
+        aboutText: "فلسطين هي أرض غنية بالتاريخ والثقافة. من أشجار الزيتون القديمة إلى مدنها النابضة بالحياة، تقدم فلسطين مزيجًا فريدًا من التقاليد والحداثة.",
+        footer: "© 2023 وصفات فلسطين. صمم بواسطة محمد القضاعة.",
+        contact: "للتواصل: mohammadalqedra1976@gmail.com"
+      }
+    };
+
+    let currentLanguage = 'en';
+
+    languageToggle.addEventListener('click', () => {
+      currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+      htmlElement.lang = currentLanguage;
+      htmlElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+      languageToggle.textContent = currentLanguage === 'en' ? 'عربي' : 'English';
+      updateContent();
+    });
+
+    function updateContent() {
+      document.querySelector('[href="#home"]').textContent = translations[currentLanguage].home;
+      document.querySelector('[href="#recipes"]').textContent = translations[currentLanguage].recipes;
+      document.querySelector('[href="#about"]').textContent = translations[currentLanguage].about;
+      document.querySelector('#home h1').textContent = translations[currentLanguage].welcome;
+      document.querySelector('#home p').textContent = translations[currentLanguage].explore;
+      document.querySelector('#recipes h2').textContent = translations[currentLanguage].categories;
+      document.querySelectorAll('.category-card h3')[0].textContent = translations[currentLanguage].breakfast;
+      document.querySelectorAll('.category-card h3')[1].textContent = translations[currentLanguage].lunch;
+      document.querySelectorAll('.category-card h3')[2].textContent = translations[currentLanguage].drinks;
+      document.querySelectorAll('.category-card h3')[3].textContent = translations[currentLanguage].sweets;
+      document.querySelector('#about h2').textContent = translations[currentLanguage].about;
+      document.querySelector('#about p').textContent = translations[currentLanguage].aboutText;
+      document.querySelector('footer p:first-child').textContent = translations[currentLanguage].footer;
+      document.querySelector('footer p:last-child').textContent = translations[currentLanguage].contact;
+    }
+  </script>
+</body>
+</html>
